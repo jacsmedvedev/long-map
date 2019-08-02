@@ -18,7 +18,7 @@ public class LongMapImpl<V> implements LongMap<V> {
         Node newNode = new Node(key,value);
         int index = newNode.hashCode() & (buckets.length - 1);
         buckets[index] = newNode;
-        countSize();
+        size++;
         return (V) newNode.getValue();
     }
 
@@ -31,15 +31,19 @@ public class LongMapImpl<V> implements LongMap<V> {
         return null;
     }
 
-//    public void getK() {
-//        for (Node n : buckets) {
-//            if (n!=null)System.out.println(n.toString());
-////            if (n != null && n.getKey() == key) return (V) n.getValue();
-//        }
-//    }
 
     public V remove(long key) {
-        countSize();
+        V rez;
+        if (containsKey(key)){
+            for (int i = 0; i < buckets.length; i++) {
+                if (buckets[i] != null && buckets[i].getKey() == key){
+                    rez = (V) buckets[i].getValue();
+                    buckets[i] = null;
+                    size--;
+                    return rez;
+                }
+            }
+        }
         return null;
     }
 
@@ -48,19 +52,37 @@ public class LongMapImpl<V> implements LongMap<V> {
     }
 
     public boolean containsKey(long key) {
+        for (Node n : buckets) {
+            if (n != null){
+                if (n.getKey() == key) return true;
+            }
+        }
         return false;
     }
 
     public boolean containsValue(V value) {
+        for (Node n : buckets) {
+            if (n != null){
+                if (n.getValue() == value) return true;
+            }
+        }
         return false;
     }
 
     public long[] keys() {
-        return null;
+        long[] rez = new long[buckets.length];
+        for (int i = 0; i < buckets.length; i++) {
+            if (buckets[i] != null) rez[i] = buckets[i].getKey();
+        }
+        return rez;
     }
 
     public V[] values() {
-        return null;
+        Object[] rez = new Object [buckets.length];
+        for (int i = 0; i < buckets.length; i++) {
+            if (buckets[i] != null) rez[i] = buckets[i].getValue();
+        }
+        return (V[]) rez;
     }
 
     public long size() {
@@ -70,11 +92,6 @@ public class LongMapImpl<V> implements LongMap<V> {
     public void clear() {
         int oldLength = buckets.length;
         buckets = new Node[oldLength];
-        countSize();
-    }
-
-    private void countSize(){
         size = 0;
-        for (Node n : buckets) if (n!=null) size++;
     }
 }

@@ -1,2 +1,4 @@
 .idea/
 long-map.iml
+/src/main/java/Main.java
+target/
