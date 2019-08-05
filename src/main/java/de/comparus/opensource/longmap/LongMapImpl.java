@@ -24,9 +24,7 @@ public class LongMapImpl<V> implements LongMap<V> {
 
     public V get(long key) {
         for (Node n : buckets) {
-            if (n != null){
-                if (n.getKey() == key) return (V) n.getValue();
-            }
+            if (n.getKey() == key) return (V) n.getValue();
         }
         return null;
     }
@@ -53,18 +51,14 @@ public class LongMapImpl<V> implements LongMap<V> {
 
     public boolean containsKey(long key) {
         for (Node n : buckets) {
-            if (n != null){
-                if (n.getKey() == key) return true;
-            }
+            if (n != null && n.getKey() == key) return true;
         }
         return false;
     }
 
     public boolean containsValue(V value) {
         for (Node n : buckets) {
-            if (n != null){
-                if (n.getValue() == value) return true;
-            }
+            if (n != null && n.getValue() == value) return true;
         }
         return false;
     }

@@ -7,7 +7,6 @@ import java.util.Objects;
  */
 public class Node<V> {
 
-    private int hash;
     private long key;
     private V value;
     private Node<V> next;
@@ -20,15 +19,10 @@ public class Node<V> {
         this.value = value;
     }
 
-    public Node(int hash, long key, V value, Node<V> next) {
-        this.hash = hash;
+    public Node(long key, V value, Node<V> next) {
         this.key = key;
         this.value = value;
         this.next = next;
-    }
-
-    public int getHash() {
-        return hash;
     }
 
     public long getKey() {
@@ -48,23 +42,12 @@ public class Node<V> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Node<?> node = (Node<?>) o;
-        return hash == node.hash &&
-                key == node.key &&
-                Objects.equals(value, node.value);
+        return key == node.key &&
+                value.equals(node.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hash, key, value);
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "hash=" + hash +
-                ", key=" + key +
-                ", value=" + value +
-                ", next=" + next +
-                '}';
+        return Objects.hash(key, value);
     }
 }
