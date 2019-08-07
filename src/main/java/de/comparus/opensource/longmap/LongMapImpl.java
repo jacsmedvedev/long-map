@@ -4,6 +4,7 @@ public class LongMapImpl<V> implements LongMap<V> {
 
     private int size = 0;
     private int DEFAULT_MAP_SIZE = 16;
+    private double LOAD_FACTOR = 0.75;
     private Node[] buckets;
 
     public LongMapImpl() {
@@ -87,5 +88,9 @@ public class LongMapImpl<V> implements LongMap<V> {
         int oldLength = buckets.length;
         buckets = new Node[oldLength];
         size = 0;
+    }
+
+    private void resize(){
+        //TODO
     }
 }

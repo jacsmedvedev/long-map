@@ -1,6 +1,7 @@
 import de.comparus.opensource.longmap.LongMapImpl;
 import de.comparus.opensource.longmap.Node;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,13 @@ public class Main {
 
         LongMapImpl longMap = new LongMapImpl(55);
         longMap.put(444, new Node<>(777, "FFFFFFFFFf"));
-        System.out.println(longMap.get(444));
-        longMap.put(22, new Node<>(777, 55555));
+        longMap.put(22, "hsdjkfhjksdnf");
+        longMap.put(4678, new Object());
+        System.out.println(Arrays.asList(longMap.values()).toString());
+//        System.out.println(longMap.size());
+//
+//        longMap.clear();
+//        System.out.println(longMap.get(444));
+
     }
 }
