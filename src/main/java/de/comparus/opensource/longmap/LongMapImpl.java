@@ -3,16 +3,19 @@ package de.comparus.opensource.longmap;
 public class LongMapImpl<V> implements LongMap<V> {
 
     private int size = 0;
-    private int DEFAULT_MAP_SIZE = 16;
-    private double LOAD_FACTOR = 0.75;
+    private final int DEFAULT_MAP_SIZE = 16;
+    private float LOAD_FACTOR = 0.75f;
+    private int sizeWhenMapShouldDouble;
     private Node[] buckets;
 
     public LongMapImpl() {
         buckets = new Node[DEFAULT_MAP_SIZE];
+        sizeWhenMapShouldDouble = (int)(DEFAULT_MAP_SIZE * LOAD_FACTOR);
     }
 
     public LongMapImpl(int initSize) {
         buckets = new Node[initSize];
+        sizeWhenMapShouldDouble = (int)(initSize * LOAD_FACTOR);
     }
 
     public V put(long key, V value) {
@@ -20,6 +23,7 @@ public class LongMapImpl<V> implements LongMap<V> {
         int index = newNode.hashCode() & (buckets.length - 1);
         buckets[index] = newNode;
         size++;
+        if (size == sizeWhenMapShouldDouble) resize();
         return (V) newNode.getValue();
     }
 
@@ -91,6 +95,15 @@ public class LongMapImpl<V> implements LongMap<V> {
     }
 
     private void resize(){
-        //TODO
+        Node[] newbuckets = new Node[buckets.length * 2];
+        size = 0;
+        for (Node n : buckets ) {
+            if (n == null) continue;
+            int index = n.hashCode() & (newbuckets.length - 1);
+            newbuckets[index] = n;
+            size++;
+        }
+        buckets = newbuckets;
+        sizeWhenMapShouldDouble = (int)(buckets.length * LOAD_FACTOR);
     }
 }
