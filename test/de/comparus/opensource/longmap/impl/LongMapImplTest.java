@@ -60,6 +60,7 @@ public class LongMapImplTest {
         arr[1] = 222l;
         arr[2] = 555l;
         arr[3] = 125l;
+        testMap.clear();
         testMap.put(11L,"Test");
         testMap.put(222L,"Test2");
         testMap.put(555L,"Test3");
