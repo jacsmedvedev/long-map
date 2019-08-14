@@ -29,7 +29,9 @@ public class LongMapImpl<V> implements LongMap<V> {
 
     public V get(long key) {
         for (Node n : buckets) {
-            if (n.getKey() == key) return (V) n.getValue();
+            if (n != null){
+                if (n.getKey() == key) return (V) n.getValue();
+            }
         }
         return null;
     }
