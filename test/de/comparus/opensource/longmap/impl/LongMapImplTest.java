@@ -1,7 +1,6 @@
 package de.comparus.opensource.longmap.impl;
 
 
-import de.comparus.opensource.longmap.entity.Node;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,61 +22,48 @@ public class LongMapImplTest {
     @Before
     public void initMap(){
         testMap = new LongMapImpl(INIT_SIZE);
+        testMap.put(3434l,"Test");
+        testMap.put(33l,"Test2");
+        testMap.put(555l,"Test3");
     }
 
     @Test
     public void getTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
         assertThat("Test2", is(testMap.get(33l)));
     }
 
     @Test
     public void putTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
-        Node n = new Node(33l,"Test2");
-        assertEquals(n.getValue(), testMap.get(33l));
+        assertEquals("Test2", testMap.get(33l));
     }
 
     @Test
     public void removeTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
         testMap.remove(33l);
         assertNull(testMap.get(33l));
     }
 
     @Test
     public void containsKeyTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
         assertTrue(testMap.containsKey(33L));
     }
 
     @Test
     public void containsValueTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
         assertTrue(testMap.containsValue("Test2"));
     }
 
     @Test
     public void keysTest() {
         long[] arr = new long[INIT_SIZE];
-        arr[0] = 3434l;
-        arr[1] = 33l;
+        arr[0] = 11l;
+        arr[1] = 222l;
         arr[2] = 555l;
         arr[3] = 125l;
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
-        testMap.put(125l,"Test4");
+        testMap.put(11L,"Test");
+        testMap.put(222L,"Test2");
+        testMap.put(555L,"Test3");
+        testMap.put(125L,"Test4");
         long[] arr2 = testMap.keys();
         Arrays.sort(arr);
         Arrays.sort(arr2);
@@ -85,34 +71,31 @@ public class LongMapImplTest {
 
     @Test
     public void valuesTest() {
-        testMap.put(3434l,"Test11");
-        testMap.put(33l,"Test22");
-        testMap.put(555l,"Test33");
-        testMap.put(125l,"Test44");
+        testMap.put(657L,"Test11");
+        testMap.put(2734L,"Test22");
+        testMap.put(44L,"Test33");
+        testMap.put(6565L,"Test44");
         assertNotNull(testMap.values());
     }
 
     @Test
     public void isEmptyTest() {
         LongMapImpl emptyMap = new LongMapImpl();
-        assertThat(0l, is(emptyMap.size()));
+        assertThat(0L, is(emptyMap.size()));
     }
 
     @Test
     public void sizeTest() {
-        for (int i = 0; i < 20l; i++) {
+        for (int i = 0; i < 20L; i++) {
             testMap.put(i, String.valueOf(i));
         }
-        assertThat(testMap.size(), is(20l));
+        assertThat(testMap.size(), is(23L));
     }
 
     @Test
     public void clearTest() {
-        testMap.put(3434l,"Test");
-        testMap.put(33l,"Test2");
-        testMap.put(555l,"Test3");
         testMap.clear();
-        assertThat(testMap.size(), is(0l));
+        assertThat(testMap.size(), is(0L));
     }
 
     @After
