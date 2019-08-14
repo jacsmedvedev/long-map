@@ -1,4 +1,4 @@
-package de.comparus.opensource.longmap;
+package de.comparus.opensource.longmap.entity;
 
 import java.util.Objects;
 

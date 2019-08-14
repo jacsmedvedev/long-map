@@ -1,4 +1,7 @@
-package de.comparus.opensource.longmap;
+package de.comparus.opensource.longmap.impl;
+
+import de.comparus.opensource.longmap.LongMap;
+import de.comparus.opensource.longmap.entity.Node;
 
 public class LongMapImpl<V> implements LongMap<V> {
 

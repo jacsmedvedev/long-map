@@ -1,6 +1,7 @@
-package de.comparus.opensource.longmap;
+package de.comparus.opensource.longmap.impl;
 
 
+import de.comparus.opensource.longmap.entity.Node;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
