@@ -2,6 +2,7 @@ package de.comparus.opensource.longmap.entity;
 
 import java.util.Objects;
 
+
 /**
  * Created by medvedevyakov on 2019-07-29.
  */
@@ -33,8 +34,16 @@ public class Node<V> {
         return value;
     }
 
+    public void setValue(V value) {
+        this.value = value;
+    }
+
     public Node<V> getNext() {
         return next;
+    }
+
+    public void setNext(Node<V> next) {
+        this.next = next;
     }
 
     @Override

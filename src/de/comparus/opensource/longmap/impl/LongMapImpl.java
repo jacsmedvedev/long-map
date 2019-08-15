@@ -24,7 +24,21 @@ public class LongMapImpl<V> implements LongMap<V> {
     public V put(long key, V value) {
         Node newNode = new Node(key,value);
         int index = newNode.hashCode() & (buckets.length - 1);
-        buckets[index] = newNode;
+        if (buckets[index] == null){
+            buckets[index] = newNode;
+        } else {
+            Node oldNode = buckets[index];
+            if (newNode.getKey() == oldNode.getKey()){
+                oldNode.setValue(newNode.getValue());
+            } else {
+                if (oldNode.getNext() == null){
+                    oldNode.setNext(newNode);
+                } else {
+                    Node n = oldNode.getNext();
+                    n.setNext(newNode);
+                }
+            }
+        }
         size++;
         if (size == sizeWhenMapShouldDouble) resize();
         return (V) newNode.getValue();
@@ -33,7 +47,12 @@ public class LongMapImpl<V> implements LongMap<V> {
     public V get(long key) {
         for (Node n : buckets) {
             if (n != null){
-                if (n.getKey() == key) return (V) n.getValue();
+                if (n.getNext() != null){
+                    if (n.getKey() == key){
+                        return (V) n.getValue();
+                    }
+
+                }
             }
         }
         return null;
