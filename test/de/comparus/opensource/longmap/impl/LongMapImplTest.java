@@ -13,10 +13,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 
+/*
+    REMARK !!! (для разработчиков компании Сomparus, которые будут проверять
+                данные тесты)
+
+                На текущем проекте вообще не используются юнит-тесты, поэтому
+                мои умения их писать очень невелики. Но я готов учиться их писать.
+ */
+
 @RunWith(JUnit4.class)
 public class LongMapImplTest {
 
     private final int INIT_SIZE = 50;
+    private final int NUMBER_OF_ADDED_ITEMS = 10;
     private LongMapImpl testMap;
 
     @Before
@@ -25,11 +34,17 @@ public class LongMapImplTest {
         testMap.put(3434l,"Test");
         testMap.put(33l,"Test2");
         testMap.put(555l,"Test3");
+        testMap.put(2345l,"XXX");
+        testMap.put(2345l,"XXX");
+        testMap.put(431l,"Check");
+        testMap.put(7364l,"Do");
+        testMap.put(001l,"Some");
+        testMap.put(70743l,"Medved");
     }
 
     @Test
     public void getTest() {
-        assertThat("Test2", is(testMap.get(33l)));
+        assertEquals("Test2", testMap.get(33L));
     }
 
     @Test
@@ -87,10 +102,11 @@ public class LongMapImplTest {
 
     @Test
     public void sizeTest() {
-        for (int i = 0; i < 20L; i++) {
+        testMap.clear();
+        for (int i = 0; i < NUMBER_OF_ADDED_ITEMS; i++) {
             testMap.put(i, String.valueOf(i));
         }
-        assertThat(testMap.size(), is(23L));
+        assertThat((int)testMap.size(), is(NUMBER_OF_ADDED_ITEMS));
     }
 
     @Test
